@@ -42,7 +42,7 @@ ExpenseTracker/
 ## Project Definition
 
 ## Screenshots
-- [updated GitHub profile](docs/screenshots/git_profile.jpeg) 
+- [updated GitHub profile](docs/screenshots/git_profile.png) 
 - [Enabled 2FA](docs/screenshots/enabled_2FA.png)
 - [Public SSH key](docs/screenshots/ssh_key.png)
 
