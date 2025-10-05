@@ -40,6 +40,10 @@ ExpenseTracker/
     └── screenshots/
 
 ## Project Definition
+The ExpenseTracker is a simple cloud-based web application that allows users to record, manage, and analyze their daily expenses.
+The goal is to demonstrate how a small-scale application can be designed, deployed, and managed in a cloud environment.  
+The project will include a backend service for storing and retrieving data, a cloud database for persistent storage, and basic functionality to visualize or summarize expenses.
+It focuses on applying core cloud concepts such as scalability, security, and data accessibility.
 
 ## Screenshots
 - [updated GitHub profile](screenshots/git_profile.png) 
