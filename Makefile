@@ -1,18 +1,23 @@
-.PHONY: test run install clean
+.PHONY: install test run clean dev
 
-# Install runtime + test deps from requirements.txt
+# Install runtime (+ dev) deps
 install:
 	python -m pip install --upgrade pip
 	pip install -r requirements.txt
 
-# Run the test suite with pytest
+dev:
+	python -m pip install --upgrade pip
+	pip install -r requirements.txt -r requirements-dev.txt
+
+# Run the test suite
 test:
-	pytest -q
+	python -m pytest -q
 
-# Run the API locally with reload
+# Run the API locally with reload (your app is in src/expense_tracker/app.py)
 run:
-	uvicorn expense_tracker.main:app --reload --app-dir src
+	uvicorn expense_tracker.app:app --reload --app-dir src
 
-# Remove caches and temporary files
+# Clean caches
 clean:
 	rm -rf __pycache__ .pytest_cache *.pyc
+
