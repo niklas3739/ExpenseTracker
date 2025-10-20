@@ -81,3 +81,8 @@ These tests focus on validating the creation, retrieval, and management of expen
 The tests are implemented using pytest and executed through the Makefile with the commands `make test` and `make cov`, which also generate detailed coverage reports.  
 By integrating these tests into the continuous integration pipeline, every code change is automatically validated before merging and this prevents regressions and maintaining reliability. 
 This setup ensures that both local development and CI environments execute the same testing process and this is contributing to a consistent and maintainable workflow.
+
+---
+
+## Screenshots
+- [Test execution via CI](screenshots/ci_tests.png)
