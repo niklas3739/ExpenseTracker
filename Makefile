@@ -1,6 +1,5 @@
 .PHONY: install test run clean dev
 
-# Install runtime (+ dev) deps
 install:
 	python -m pip install --upgrade pip
 	pip install -r requirements.txt
@@ -13,7 +12,7 @@ dev:
 test:
 	python -m pytest -q
 
-# Run the API locally with reload (your app is in src/expense_tracker/app.py)
+# Run the API locally with reload
 run:
 	uvicorn expense_tracker.app:app --reload --app-dir src
 
