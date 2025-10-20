@@ -11,6 +11,9 @@ install:
 test:
 	$(PY) -m pytest -q
 
+cov:
+	$(PY) -m pytest --cov=expense_tracker --cov-report=term-missing --cov-report=html --cov-fail-under=85
+
 # Run the API locally with reload
 run:
 	uvicorn expense_tracker.app:app --reload
