@@ -1,6 +1,10 @@
 # ignore .DSstore files
 *.DS_Store
 
+dev.db
+__pycache__/
+*.pyc
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
