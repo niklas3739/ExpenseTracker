@@ -70,7 +70,7 @@ triggering of workflows on commits and pull requests, and easy configuration thr
 support for dependency caching, service containers, and multiple Python versions. This setup ensures that testing, 
 coverage, and validation processes are reproducible, fast, and reliable across all environments.
 
-[find YAML file for Continous integration here](.github/workflows/ci.yml)
+[find YAML file for Continous integration here](../.github/workflows/ci.yml)
 
 ---
 
