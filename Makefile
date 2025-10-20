@@ -1,22 +1,23 @@
-.PHONY: install test run clean dev
+.PHONY: install dev test run cov clean
+
+PY := python
+PIP := pip
 
 install:
-	python -m pip install --upgrade pip
-	pip install -r requirements.txt
-
-dev:
-	python -m pip install --upgrade pip
-	pip install -r requirements.txt -r requirements-dev.txt
+	$(PY) -m pip install --upgrade pip
+	$(PIP) install -r requirements.txt
 
 # Run the test suite
 test:
-	python -m pytest -q
+	$(PY) -m pytest -q
 
 # Run the API locally with reload
 run:
-	uvicorn expense_tracker.app:app --reload --app-dir src
+	uvicorn expense_tracker.app:app --reload
 
-# Clean caches
+# Clean caches/build artifacts
 clean:
-	rm -rf __pycache__ .pytest_cache *.pyc
-
+	rm -rf __pycache__ .pytest_cache .mypy_cache
+	rm -rf .coverage htmlcov
+	rm -rf build dist *.egg-info
+	find . -name "*.pyc" -delete -o -name "*.pyo" -delete

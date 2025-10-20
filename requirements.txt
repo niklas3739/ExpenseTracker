@@ -1,7 +1,8 @@
-fastapi
-uvicorn[standard]
-sqlmodel
-SQLAlchemy
-pydantic
-python-dotenv
+fastapi>=0.111
+uvicorn>=0.30
+sqlmodel>=0.0.21
+pydantic>=2.7
+sqlalchemy>=2.0
+httpx>=0.27
+pytest>=8.1
 
