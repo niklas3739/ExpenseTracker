@@ -26,7 +26,7 @@ def test_add_expense_equal_and_list():
         assert len(items) == 1
         assert items[0]["payer_id"] == "alice"
         assert items[0]["amount"] == 30.0
-        assert items[0]["split_type"] == "equal"
+        assert items[0]["split_type"] == "SplitType.equal"
 
 def test_add_expense_shares_and_percent():
     with TestClient(app) as client:
