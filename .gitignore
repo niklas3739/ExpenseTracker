@@ -1,6 +1,8 @@
 # ignore .DSstore files
 *.DS_Store
 
+.idea/*
+
 dev.db
 __pycache__/
 *.pyc
