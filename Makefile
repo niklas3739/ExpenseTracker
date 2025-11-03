@@ -9,7 +9,7 @@ install:
 
 # Run the test suite
 test:
-	$(PY) -m pytest -q
+	$(PY) -m pytest -q tests
 
 cov:
 	$(PY) -m pytest --cov=expense_tracker --cov-report=term-missing --cov-report=html --cov-fail-under=85

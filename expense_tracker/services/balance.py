@@ -5,6 +5,13 @@ from expense_tracker.models.expense import Expense, ExpenseSplit, Settlement
 
 
 def compute_balances(s: Session, gid: int) -> Dict[str, float]:
+    """
+    Compute per-user balances for a group:
+      +amount for what a user paid,
+      -amount for what a user owes via splits,
+      settlements adjust balances accordingly.
+    Returns rounded balances per user_id.
+    """
     stmt_members = select(GroupMember).where(GroupMember.group_id == gid)
     members = [m.user_id for m in s.exec(stmt_members).all()]
     balances: Dict[str, float] = {u: 0.0 for u in members}
@@ -22,6 +29,10 @@ def compute_balances(s: Session, gid: int) -> Dict[str, float]:
 
 
 def payout_suggestions(balances: Dict[str, float]) -> List[dict]:
+    """
+    Produce a minimal set of peer-to-peer payouts to settle balances.
+    Returns a list of dicts: {"from": debtor, "to": creditor, "amount": value}
+    """
     creditors: List[Tuple[str, float]] = sorted(
         [(u, v) for u, v in balances.items() if v > 0], key=lambda x: -x[1]
     )

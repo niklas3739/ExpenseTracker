@@ -7,6 +7,7 @@ from expense_tracker.models.group import Group, GroupMember
 from expense_tracker.models.expense import Expense, ExpenseSplit
 from expense_tracker.schemas.expense import ExpenseCreate, ExpenseRead
 from expense_tracker.services.splits import normalize_splits
+from expense_tracker.services.errors import SplitValidationError
 
 router = APIRouter(prefix="/groups/{gid}/expenses", tags=["expenses"])
 
@@ -27,7 +28,10 @@ def add_expense(gid: int, payload: ExpenseCreate, s: Session = Depends(get_db)):
     if missing:
         raise HTTPException(400, detail=f"Users not in group: {missing}")
 
-    norm = normalize_splits(payload.amount, payload.split_type, members, payload.splits)
+    try:
+        norm = normalize_splits(payload.amount, payload.split_type, members, payload.splits)
+    except SplitValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
     ex = Expense(
         group_id=gid,
