@@ -1,5 +1,4 @@
-.PHONY: install dev test run cov clean
-
+.PHONY: install test cov run lint format clean
 PY := python
 PIP := pip
 
@@ -7,20 +6,21 @@ install:
 	$(PY) -m pip install --upgrade pip
 	$(PIP) install -r requirements.txt
 
-# Run the test suite
 test:
 	$(PY) -m pytest -q tests
 
 cov:
-	$(PY) -m pytest --cov=expense_tracker --cov-report=term-missing --cov-report=html --cov-fail-under=85
+	$(PY) -m pytest --cov=expense_tracker --cov-report=term-missing --cov-fail-under=85
 
-# Run the API locally with reload
+format:
+	$(PY) -m black expense_tracker tests
+
 run:
-	uvicorn expense_tracker.app:app --reload
+	uvicorn expense_tracker.app:app --reload --host 0.0.0.0 --port 8000
 
-# Clean caches/build artifacts
 clean:
-	rm -rf __pycache__ .pytest_cache .mypy_cache
-	rm -rf .coverage htmlcov
-	rm -rf build dist *.egg-info
-	find . -name "*.pyc" -delete -o -name "*.pyo" -delete
+	rm -rf __pycache__ .pytest_cache .mypy_cache .coverage htmlcov build dist *.egg-info
+	find . -name "*.py[co]" -delete
+
+lint:
+	$(PY) -m flake8 expense_tracker tests

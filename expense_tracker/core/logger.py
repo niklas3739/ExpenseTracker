@@ -1,9 +1,11 @@
 import logging
 import structlog
-from .config import settings
+import os
+
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 
 logging.basicConfig(
-    level=getattr(logging, settings.log_level.upper(), logging.INFO),
+    level=getattr(logging, LOG_LEVEL, logging.INFO),
     format="%(message)s",
 )
 
@@ -16,10 +18,10 @@ structlog.configure(
         structlog.processors.JSONRenderer(),
     ],
     wrapper_class=structlog.make_filtering_bound_logger(
-        getattr(logging, settings.log_level.upper(), logging.INFO)
+        getattr(logging, LOG_LEVEL, logging.INFO)
     ),
     context_class=dict,
     logger_factory=structlog.stdlib.LoggerFactory(),
 )
 
-logger = structlog.get_logger(settings.app_name)
+logger = structlog.get_logger("expense-tracker")
