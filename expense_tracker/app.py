@@ -28,14 +28,10 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    static_dir = Path(__file__).resolve().parent / "ui" / "static"
-    if static_dir.exists():
-        app.mount("/ui", StaticFiles(directory=str(static_dir), html=True), name="static")
-
-        app.include_router(groups_router)
-        app.include_router(expenses_router)
-        app.include_router(settlements_router)
-        app.include_router(balance_router)
+    app.include_router(groups_router)
+    app.include_router(expenses_router)
+    app.include_router(settlements_router)
+    app.include_router(balance_router)
 
     return app
 
