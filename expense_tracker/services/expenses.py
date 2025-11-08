@@ -5,6 +5,7 @@ from expense_tracker.models.expense import Expense, ExpenseSplit, Settlement, Sp
 from expense_tracker.services.errors import GroupNotFound, ExpenseNotFound, SplitValidationError
 from expense_tracker.services.balance import compute_balances, payout_suggestions
 from expense_tracker.services.splits import normalize_splits
+from enum import Enum
 
 
 # ---------- Helpers ----------
@@ -61,9 +62,15 @@ def create_expense(
                 input_splits.append(ExpenseSplit(expense_id=0, user_id=user_id, share_value=share_value, owed_amount=0.0))
 
     members = _get_group_member_ids(session, group_id)
+
+    # Ensure we pass the *value* of the enum (e.g., "equal"), not "SplitType.equal"
+    if isinstance(split_type, SplitType):
+        split_type_str = split_type.value  # e.g. "equal"
+    else:
+        split_type_str = str(split_type)
     normalized: List[ExpenseSplit] = normalize_splits(
         amount=amount,
-        split_type=str(split_type),
+        split_type=split_type_str,
         members=members,
         splits=input_splits,
     )
