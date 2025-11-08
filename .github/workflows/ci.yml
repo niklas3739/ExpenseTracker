@@ -28,3 +28,6 @@ jobs:
 
       - name: Run tests
         run: make test
+
+      - name: Test coverage
+        run: make cov
