@@ -195,3 +195,4 @@ Combined with the existing CI for testing, the project now has full automated va
 
 ## Screenshots
 - [Test execution via CI](screenshots/build_and_push_pipeline.png)
+- [Packages in GitHub Profile](screenshots/packages.png)
