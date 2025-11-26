@@ -33,9 +33,13 @@ Configured **pytest** for test execution and coverage reporting to ensure code q
 Designed and implemented the backend as a **FastAPI microservice** with structured logging via **structlog**.  
 Separated API, business, and persistence layers, added full testing for all routes and logic, and automated deployment verification through CI.
 
+### **Hito 4 – Composition of Services**
+Containerized the application and designed a complete **multi-service architecture** using Docker and Docker Compose.  
+Created Docker images for the backend, frontend, and database, configured persistent storage through volumes, added an automated cluster health test, and published all microservice images to **GitHub Packages** using CI/CD workflows.
 
 ## Documentation
 - [Milestone 1 – Repository Setup and Project Definition](docs/hito01.md)
 - [Milestone 2 – Continuous Integration](docs/hito02.md)
 - [Milestone 3 – Development of Microservices](docs/hito03.md)
+- [Milestone 4 – Composition of Services](docs/hito04.md)
 

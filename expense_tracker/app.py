@@ -1,8 +1,10 @@
+import os
+from contextlib import asynccontextmanager
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from contextlib import asynccontextmanager
-from pathlib import Path
 
 from expense_tracker.core.db import init_db
 from expense_tracker.api.routes.groups import router as groups_router
@@ -36,4 +38,18 @@ def create_app() -> FastAPI:
     return app
 
 
+# Create the global FastAPI instance that uvicorn will use
 app = create_app()
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
+@app.get("/version")
+def version():
+    return {
+        "env": os.getenv("APP_ENV", "unknown"),
+        "version": os.getenv("APP_VERSION", "0.0.0"),
+    }
