@@ -12,11 +12,17 @@ RUN npm run build
 # ---- Runtime stage: Nginx ----
 FROM nginx:1.27-alpine
 
-# Nginx config for SPA + API proxy
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 # Copy CRA build output
 COPY --from=build /app/build/ /usr/share/nginx/html/
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Template + entrypoint that injects PORT and API_UPSTREAM
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+
+# envsubst is available via gettext
+RUN apk add --no-cache gettext
+
+# Default upstream (you'll override on Railway)
+ENV API_UPSTREAM=http://localhost:8000/
+
+EXPOSE 8080
+CMD ["/bin/sh", "-c", "envsubst '$$PORT $$API_UPSTREAM' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
