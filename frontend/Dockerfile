@@ -25,4 +25,4 @@ COPY nginx.conf /opt/nginx/nginx.conf.local
 
 ENV API_UPSTREAM=http://localhost:8000/
 
-CMD ["/bin/sh", "-c", "envsubst '$$PORT $$API_UPSTREAM' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+CMD ["/bin/sh", "-c", "envsubst '$$PORT $$API_UPSTREAM' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && echo '--- NGINX CONF ---' && cat /etc/nginx/conf.d/default.conf && echo '--- END ---' && nginx -g 'daemon off;'"]
