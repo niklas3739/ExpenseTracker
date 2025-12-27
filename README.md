@@ -37,9 +37,14 @@ Separated API, business, and persistence layers, added full testing for all rout
 Containerized the application and designed a complete **multi-service architecture** using Docker and Docker Compose.  
 Created Docker images for the backend, frontend, and database, configured persistent storage through volumes, added an automated cluster health test, and published all microservice images to **GitHub Packages** using CI/CD workflows.
 
+### **Hito 5 - Deployment of the Application on a PaaS**
+Deployed the complete ExpenseTracker application to a **production-grade cloud environment** using the Railway PaaS.  
+Configured automated deployments directly from GitHub, connected a managed PostgreSQL database, implemented real-time observability through logs and metrics, and validated the deployment with performance and stress testing to ensure reliability and scalability.
+
 ## Documentation
 - [Milestone 1 – Repository Setup and Project Definition](docs/hito01.md)
 - [Milestone 2 – Continuous Integration](docs/hito02.md)
 - [Milestone 3 – Development of Microservices](docs/hito03.md)
 - [Milestone 4 – Composition of Services](docs/hito04.md)
+- [Milestone 5 – Deployment of the Application on a PaaS](docs/hito05.md)
 
