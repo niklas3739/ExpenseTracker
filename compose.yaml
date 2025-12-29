@@ -44,6 +44,9 @@ services:
       - "4200:80"
     depends_on:
       - api
+    environment:
+      - PORT=80
+      - API_UPSTREAM=http://api:8000/
 
 volumes:
   db_data:

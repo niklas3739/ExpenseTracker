@@ -1,3 +1,4 @@
+# ---- Build stage ----
 FROM node:20-alpine AS build
 WORKDIR /app
 
@@ -12,11 +13,16 @@ RUN npm run build
 # ---- Runtime stage: Nginx ----
 FROM nginx:1.27-alpine
 
-# Nginx config for SPA + API proxy
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN apk add --no-cache gettext
 
-# Copy CRA build output
 COPY --from=build /app/build/ /usr/share/nginx/html/
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Copy Railway template into a place we will render from
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+
+# Keep local compose config, but NOT in conf.d (so Railway won't load it)
+COPY nginx.conf /opt/nginx/nginx.conf.local
+
+ENV API_UPSTREAM=http://localhost:8000/
+
+CMD ["/bin/sh", "-c", "envsubst '$$PORT $$API_UPSTREAM' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && echo '--- NGINX CONF ---' && cat /etc/nginx/conf.d/default.conf && echo '--- END ---' && nginx -g 'daemon off;'"]
