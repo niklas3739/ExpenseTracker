@@ -595,8 +595,8 @@ function BalancePanel({ gid }) {
                   <tbody>
                     {data.suggestions.map((s, i) => (
                       <tr key={i}>
-                        <td style={styles.td}>{s.from_user_id}</td>
-                        <td style={styles.td}>{s.to_user_id}</td>
+                        <td style={styles.td}>{s.from}</td>
+                        <td style={styles.td}>{s.to}</td>
                         <td style={styles.td}>€ {Number(s.amount).toFixed(2)}</td>
                       </tr>
                     ))}
